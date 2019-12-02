@@ -30,10 +30,7 @@ class RootState {
 
   @override
   bool operator ==(Object other) =>
-    identical(this, other) ||
-      other is RootState &&
-        runtimeType == other.runtimeType &&
-        counter == other.counter;
+      identical(this, other) || other is RootState && runtimeType == other.runtimeType && counter == other.counter;
 
   @override
   String toString() {
