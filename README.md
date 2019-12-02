@@ -7,7 +7,7 @@ This package will make your redux store undoable.
 define the dependency in your `pubspec.yaml` file:
 ```yaml
 dependencies:
-  redux_undo: ^0.1.0
+  redux_undo: ^0.1.0+4
 ```
 
 update your applications packages by running
