@@ -1,5 +1,8 @@
 name: redux_undo
 description: Make your redux store undo- and redoable. Inspired by the JS redux_undo package.
+homepage: https://github.com/michelengelen/redux_undo
+authors:
+  - Michel Engelen <michel@nomorejs.net>
 
 version: 0.1.0+1
 
