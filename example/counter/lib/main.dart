@@ -12,7 +12,7 @@ void main() => runApp(MyApp());
 /// redux_undo demo
 class MyApp extends StatelessWidget {
   final Store<UndoableState> store = Store<UndoableState>(
-    undoableReducer(rootReducer),
+    createUndoableReducer(rootReducer),
     initialState: createUndoableState(RootState.initial(), ignoreInitialState: false),
   );
 
