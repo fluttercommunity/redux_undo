@@ -4,6 +4,9 @@ import './actions.dart';
 import './classes.dart';
 import './utils.dart';
 
+/// create a new history with this helper function which does makes importing the utils needless by desfault
+UndoableState createInitialHistory(dynamic initialState) => createHistory(initialState);
+
 /// this is the core reducer that calls the given root reducer or skips it
 /// depending on what action is provided and returns the new UndoableState
 Reducer<UndoableState> undoableReducer(dynamic reducer, {UndoConfig config}) {
