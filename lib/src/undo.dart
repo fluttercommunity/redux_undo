@@ -3,7 +3,8 @@ import './actions.dart';
 import './classes.dart';
 import './utils.dart';
 
-///
+/// this is the core reducer that calls the given root reducer or skips it
+/// depending on what action is provided and returns the new UndoableState
 Reducer<UndoableState> undoableReducer(dynamic reducer, {UndoConfig config}) {
   config ??= UndoConfig();
 

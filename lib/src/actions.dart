@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:meta/meta.dart';
 
 /// Standard-Action for initiating the history
 class UndoableInitAction {}
