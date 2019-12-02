@@ -2,6 +2,11 @@
 
 This package will make your redux store undoable.
 
+## READ THIS FIRST
+> :warning:
+> 
+> **The package as it is now is still in Beta phase. So you are free to use it as is, but please keep in mind that, until version 1.0.0 is released all class, function and helper-names are prone to change.** 
+
 ## Installation
 
 define the dependency in your `pubspec.yaml` file:
