@@ -24,11 +24,11 @@ UndoableState createHistory(dynamic state, {bool ignoreInitialState = false}) {
 /// isHistory helper: check for a valid history object
 bool isHistory(UndoableState history) {
   return history is UndoableState &&
-    history.present != null &&
-    history.future != null &&
-    history.past != null &&
-    history.future is List &&
-    history.past is List;
+      history.present != null &&
+      history.future != null &&
+      history.past != null &&
+      history.future is List &&
+      history.past is List;
 }
 
 /// lengthWithoutFuture: get length of history
