@@ -1,11 +1,9 @@
-
-
 /// The state containing past, present and future
 class UndoableState {
   UndoableState({
-    @required this.past,
-    @required this.present,
-    @required this.future,
+    this.past,
+    this.present,
+    this.future,
     this.latestUnfiltered,
     this.index,
     this.size,

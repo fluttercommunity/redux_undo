@@ -1,10 +1,11 @@
 import 'package:redux/redux.dart';
+import './actions.dart';
 import './classes.dart';
 import './utils.dart';
 
 ///
 Reducer<UndoableState> undoableReducer(dynamic reducer, {UndoConfig config}) {
-  config ??= UndoConfig(blackList: <Type>[CounterDecrement]);
+  config ??= UndoConfig();
 
   return (UndoableState state, dynamic action) {
     UndoableState history = state;
