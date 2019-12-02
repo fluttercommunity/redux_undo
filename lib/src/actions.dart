@@ -11,10 +11,12 @@ class UndoableRedoAction {}
 
 /// Standard-Action for jump (to past or to future)
 class UndoableJumpAction {
+  /// intiating the UndoableJumpAction
   UndoableJumpAction({
     @required this.index,
   });
 
+  /// the index to jump to (can be positive or negative - future or past)
   final int index;
 }
 
