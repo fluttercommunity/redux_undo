@@ -1,6 +1,7 @@
 ## 0.1.0+3
 #### Critical Fix
-- added a new helper function `UndoableHistory createNewHistory(dynamic state)` to initiate the UndoableState on init
+- added a new helper function `UndoableState createUndoableState(dynamic state)` to initiate the UndoableState on init
+- renamed `undoableReducer` to `Reducer<UndoableState> createUndoableReducer(dynamic reducer, { UndoConfig config })` to keep naming consistent
 #### Updates
 - reformatted some files with dartfrmt
 
