@@ -15,19 +15,26 @@ class UndoableState {
   /// either an empty List or filled with the past states
   /// filled when using normal actions or redoActions
   final List<dynamic> past;
+
   /// the current state of the redux store
   final dynamic present;
+
   /// either an empty List or filled with future states
   /// it gets filled when using undoActions
   final List<dynamic> future;
+
   /// the latest unfiltered state of the redux store
   dynamic latestUnfiltered;
+
+  /// the current length of the past List
   int index;
+
+  /// the size of the UndoableState (past.length + 1 (present) + future.length)
   int size;
 
   @override
   String toString() =>
-    'StateHistory: List<dynamic> past: ${past.toString()}, present: ${present.toString()}, List<dynamic> future: ${future.toString()}, latestUnfiltered: ${latestUnfiltered.toString()}';
+      'StateHistory: List<dynamic> past: ${past.toString()}, present: ${present.toString()}, List<dynamic> future: ${future.toString()}, latestUnfiltered: ${latestUnfiltered.toString()}';
 }
 
 /// A class for setting the config of the Undoable
@@ -41,6 +48,7 @@ class UndoConfig {
   /// limit the length of the past List
   /// defaultValue: 10
   int limit;
+
   /// blacklist certain Actions
   List<Type> blackList;
 }

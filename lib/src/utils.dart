@@ -33,12 +33,12 @@ bool isHistory(UndoableState history) {
 
 /// lengthWithoutFuture: get length of history
 int lengthWithoutFuture(UndoableState history) {
-  return history.past.length + 1;
+  return history.index + 1;
 }
 
 /// name says it all
 UndoableState jumpToPast(UndoableState history, int index) {
-  if (index < 0 || index >= history.past.length) return history;
+  if (index < 0 || index >= history.index) return history;
 
   final List<dynamic> past = history.past;
   final List<dynamic> future = history.future;
@@ -73,7 +73,7 @@ UndoableState jumpToFuture(UndoableState history, int index) {
 /// jump to a certain index in the past or future
 UndoableState jump(UndoableState history, int index) {
   if (index > 0) return jumpToFuture(history, index - 1);
-  if (index < 0) return jumpToPast(history, history.past.length + index);
+  if (index < 0) return jumpToPast(history, history.index + index);
   return history;
 }
 
