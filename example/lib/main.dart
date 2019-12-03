@@ -13,7 +13,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   final Store<UndoableState> store = Store<UndoableState>(
     createUndoableReducer(rootReducer),
-    initialState: createUndoableState(RootState.initial(), ignoreInitialState: false),
+    initialState: createUndoableState(RootState.initial(), false),
   );
 
   @override
