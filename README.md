@@ -50,7 +50,7 @@ This is done by calling 2 separate functions:
 
 ```dart
 /// to wrap the root reducer
-Reducer<UndoableState> createUndoableReducer(Function<Reducer> reducer);
+Reducer<UndoableState> createUndoableReducer(Function<Reducer> reducer, UndoableConfig config);
 
 /// to wrap the Root state of your app.
 UndoableState createUndoableState(dynamic state);

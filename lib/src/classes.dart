@@ -38,9 +38,9 @@ class UndoableState {
 }
 
 /// A class for setting the config of the UndoableReducer
-class UndoConfig {
+class UndoableConfig {
   /// initiating the class
-  UndoConfig({
+  UndoableConfig({
     this.limit = 10,
     this.blackList = const <Type>[],
     this.whiteList = const <Type>[],
