@@ -10,8 +10,8 @@ UndoableState createUndoableState(dynamic initialState, bool ignoreInitialState)
 
 /// this is the core reducer that calls the given root reducer or skips it
 /// depending on what action is provided and returns the new UndoableState
-Reducer<UndoableState> createUndoableReducer(dynamic reducer, {UndoConfig config}) {
-  config ??= UndoConfig();
+Reducer<UndoableState> createUndoableReducer(dynamic reducer, {UndoableConfig config}) {
+  config ??= UndoableConfig();
 
   return (UndoableState state, dynamic action) {
     UndoableState history = state;
