@@ -21,18 +21,25 @@ Reducer<UndoableState> createUndoableReducer(dynamic reducer, {UndoConfig config
       history = newHistory(<dynamic>[], reducedState, <dynamic>[]);
     }
 
+    final bool isActionWhiteListed = config.whiteList.contains(action.runtimeType);
+
+    UndoableState reduceAnyways(UndoableState res) {
+      return isActionWhiteListed ? newHistory(res.past, reducer(res.present, action), res.future) : res;
+    }
+
     /// handle all Undo-, Redo-, Jump- and ClearActions here
     if (action is UndoableUndoAction) {
-      final UndoableState reducedHistory = jump(history, -1);
-      return reducedHistory;
+      final UndoableState res = jump(history, -1);
+      return reduceAnyways(res);
     } else if (action is UndoableRedoAction) {
-      final UndoableState reducedHistory = jump(history, 1);
-      return reducedHistory;
+      final UndoableState res = jump(history, 1);
+      return reduceAnyways(res);
     } else if (action is UndoableJumpAction) {
-      final UndoableState reducedHistory = jump(history, action.index);
-      return reducedHistory;
+      final UndoableState res = jump(history, action.index);
+      return reduceAnyways(res);
     } else if (action is UndoableClearHistoryAction) {
-      return newHistory(<dynamic>[], history.present, <dynamic>[]);
+      final UndoableState res = newHistory(<dynamic>[], history.present, <dynamic>[]);
+      return reduceAnyways(res);
     }
 
     final bool isActionBlacklisted = config.blackList.contains(action.runtimeType);

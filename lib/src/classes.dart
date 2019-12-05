@@ -37,12 +37,13 @@ class UndoableState {
       'StateHistory: List<dynamic> past: ${past.toString()}, present: ${present.toString()}, List<dynamic> future: ${future.toString()}, latestUnfiltered: ${latestUnfiltered.toString()}';
 }
 
-/// A class for setting the config of the Undoable
+/// A class for setting the config of the UndoableReducer
 class UndoConfig {
   /// initiating the class
   UndoConfig({
     this.limit = 10,
     this.blackList = const <Type>[],
+    this.whiteList = const <Type>[],
   });
 
   /// limit the length of the past List
@@ -51,4 +52,7 @@ class UndoConfig {
 
   /// blacklist certain Actions
   List<Type> blackList;
+
+  /// whiteList certain Actions
+  List<Type> whiteList;
 }
