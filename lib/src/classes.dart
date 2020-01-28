@@ -34,6 +34,34 @@ class UndoableState {
   /// the size of the UndoableState (past.length + 1 (present) + future.length)
   int size;
 
+  /// Lets you check if the [UndoableState] is able to undo (past has items in it)
+  /// This is especially handy when you want to disable the undo button or want to show some other kind of indication
+  ///
+  /// Example:
+  /// ```dart
+  /// RaisedButton(
+  ///   onPressed: store.state.canUndo ? () {
+  ///     store.dispatch(UndoableUndoAction());
+  ///   } : null,
+  ///   child: const Text('undo'),
+  /// ),
+  /// ```
+  bool get canUndo => past.isNotEmpty;
+
+  /// Lets you check if the [UndoableState] is able to redo (future has items in it)
+  /// This is especially handy when you want to disable the redo button or want to show some other kind of indication
+  ///
+  /// Example:
+  /// ```dart
+  /// RaisedButton(
+  ///   onPressed: store.state.canRedo ? () {
+  ///     store.dispatch(UndoableRedoAction());
+  ///   } : null,
+  ///   child: const Text('redo'),
+  /// ),
+  /// ```
+  bool get canRedo => future.isNotEmpty;
+
   @override
   String toString() =>
       'StateHistory: List<dynamic> past: ${past.toString()}, present: ${present.toString()}, List<dynamic> future: ${future.toString()}, latestUnfiltered: ${latestUnfiltered.toString()}';

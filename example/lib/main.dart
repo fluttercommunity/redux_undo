@@ -71,7 +71,6 @@ class MyHomePage extends StatelessWidget {
                   children: <Widget>[
                     RaisedButton(
                       onPressed: () {
-                        print('### pressed +1');
                         store.dispatch(CounterIncrement(index: 0));
                       },
                       child: const Text('+1'),
@@ -83,16 +82,15 @@ class MyHomePage extends StatelessWidget {
                       child: const Text('-1'),
                     ),
                     RaisedButton(
-                      onPressed: () {
-                        print('### pressed undo');
+                      onPressed: store.state.canUndo ? () {
                         store.dispatch(CustomUndo());
-                      },
+                      } : null,
                       child: const Text('undo'),
                     ),
                     RaisedButton(
-                      onPressed: () {
+                      onPressed: store.state.canRedo ? () {
                         store.dispatch(UndoableRedoAction());
-                      },
+                      } : null,
                       child: const Text('redo'),
                     )
                   ],
