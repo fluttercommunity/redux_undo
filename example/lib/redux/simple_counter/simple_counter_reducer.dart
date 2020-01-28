@@ -1,6 +1,6 @@
 import 'package:redux/redux.dart';
 
-import 'counter_actions.dart';
+import 'simple_counter_actions.dart';
 
 final Reducer<List<int>> counterReducer = combineReducers<List<int>>(<Reducer<List<int>>>[
   TypedReducer<List<int>, CounterIncrement>(_increment),

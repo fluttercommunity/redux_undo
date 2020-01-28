@@ -5,9 +5,9 @@ import 'package:redux_undo/redux_undo.dart';
 import 'package:redux_undo_example/components/home.dart';
 import 'package:redux_undo_example/components/simple_counter.dart';
 
-import 'redux/counter/counter_actions.dart';
 import 'redux/root_reducer.dart';
 import 'redux/root_state.dart';
+import 'redux/simple_counter/simple_counter_actions.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,7 +19,6 @@ final UndoableConfig config = UndoableConfig(
 
 /// redux_undo demo
 class MyApp extends StatelessWidget {
-
   final Store<UndoableState> store = Store<UndoableState>(
     createUndoableReducer(rootReducer, config: config),
     initialState: createUndoableState(RootState.initial(), false),
@@ -38,7 +37,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         navigatorKey: navigatorKey,
-//        home: const MyHomePage(title: 'Redux Undo Demo'),
         routes: <String, Widget Function(BuildContext)>{
           '/': (BuildContext context) {
             return const HomeScreenView(title: 'Welcome');

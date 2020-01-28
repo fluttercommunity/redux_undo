@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_undo/redux_undo.dart';
 import 'package:redux_undo_example/components/wrapper.dart';
-import 'package:redux_undo_example/redux/counter/counter_actions.dart';
+import 'package:redux_undo_example/redux/simple_counter/simple_counter_actions.dart';
 
 class SimpleCounter extends StatelessWidget {
   const SimpleCounter();
