@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redux_undo_example/utils/utils.dart';
 
 @immutable
 class DrawerView extends StatelessWidget {
@@ -6,23 +7,7 @@ class DrawerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _getCurrentRouteName() {
-      String currentRouteName;
-
-      Navigator.popUntil(context, (Route<dynamic> route) {
-        currentRouteName = route.settings.name;
-        return true;
-      });
-
-      return currentRouteName;
-    }
-
-    final String currentRoute = _getCurrentRouteName();
-
-    Function() _getNavigation(String route) {
-      if (route == currentRoute) return () => Navigator.pop(context);
-      return () => Navigator.popAndPushNamed(context, route);
-    }
+    final String currentRoute = getCurrentRouteName(context);
 
     return Drawer(
       // Add a ListView to the drawer. This ensures the user can scroll
@@ -39,7 +24,7 @@ class DrawerView extends StatelessWidget {
             ),
             title: const Text('Welcome'),
             selected: currentRoute == '/',
-            onTap: _getNavigation('/'),
+            onTap: getNavigation(context, '/'),
           ),
           ListTile(
             leading: Icon(
@@ -48,7 +33,7 @@ class DrawerView extends StatelessWidget {
             ),
             title: const Text('Simple Counter'),
             selected: currentRoute == 'simple_counter',
-            onTap: _getNavigation('simple_counter'),
+            onTap: getNavigation(context, 'simple_counter'),
           ),
         ],
       ),

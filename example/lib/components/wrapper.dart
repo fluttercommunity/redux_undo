@@ -13,7 +13,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const DrawerView(),
+      endDrawer: const DrawerView(),
       appBar: AppBar(
         title: Text(title),
       ),
