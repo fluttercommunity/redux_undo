@@ -10,7 +10,9 @@ class UndoableState {
     this.latestUnfiltered,
     this.index,
     this.size,
-  });
+  })  : assert(past != null),
+        assert(present != null),
+        assert(future != null);
 
   /// either an empty List or filled with the past states
   /// filled when using normal actions or redoActions

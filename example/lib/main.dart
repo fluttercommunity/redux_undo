@@ -9,10 +9,17 @@ import 'redux/root_state.dart';
 
 void main() => runApp(MyApp());
 
+final UndoableConfig config = UndoableConfig(
+  whiteList: <Type>[
+    CustomUndo,
+  ],
+);
+
 /// redux_undo demo
 class MyApp extends StatelessWidget {
+
   final Store<UndoableState> store = Store<UndoableState>(
-    createUndoableReducer(rootReducer),
+    createUndoableReducer(rootReducer, config: config),
     initialState: createUndoableState(RootState.initial(), false),
   );
 
@@ -64,6 +71,7 @@ class MyHomePage extends StatelessWidget {
                   children: <Widget>[
                     RaisedButton(
                       onPressed: () {
+                        print('### pressed +1');
                         store.dispatch(CounterIncrement(index: 0));
                       },
                       child: const Text('+1'),
@@ -76,7 +84,8 @@ class MyHomePage extends StatelessWidget {
                     ),
                     RaisedButton(
                       onPressed: () {
-                        store.dispatch(UndoableUndoAction());
+                        print('### pressed undo');
+                        store.dispatch(CustomUndo());
                       },
                       child: const Text('undo'),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:redux_undo/redux_undo.dart';
 
 /// Counter actions
 
@@ -17,3 +18,5 @@ class CounterDecrement {
 
   final int index;
 }
+
+class CustomUndo extends UndoableUndoAction {}

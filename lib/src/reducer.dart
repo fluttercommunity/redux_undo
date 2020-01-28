@@ -4,12 +4,12 @@ import './actions.dart';
 import './classes.dart';
 import './utils.dart';
 
-/// create a new history with this helper function which does makes importing the utils needless by desfault
+/// create a new [UndoableState] with this helper function which does make importing the utils needless by default
 UndoableState createUndoableState(dynamic initialState, bool ignoreInitialState) =>
     createHistory(initialState, ignoreInitialState: ignoreInitialState);
 
 /// this is the core reducer that calls the given root reducer or skips it
-/// depending on what action is provided and returns the new UndoableState
+/// depending on what action is provided and returns the new [UndoableState]
 Reducer<UndoableState> createUndoableReducer(dynamic reducer, {UndoableConfig config}) {
   config ??= UndoableConfig();
 
@@ -27,7 +27,7 @@ Reducer<UndoableState> createUndoableReducer(dynamic reducer, {UndoableConfig co
       return isActionWhiteListed ? newHistory(res.past, reducer(res.present, action), res.future) : res;
     }
 
-    /// handle all Undo-, Redo-, Jump- and ClearActions here
+    // handle all Undo-, Redo-, Jump- and ClearActions here
     if (action is UndoableUndoAction) {
       final UndoableState res = jump(history, -1);
       return reduceAnyways(res);
@@ -46,7 +46,7 @@ Reducer<UndoableState> createUndoableReducer(dynamic reducer, {UndoableConfig co
 
     final dynamic reducedState = reducer(history.present, action);
 
-    /// only update if the reduced state differs from the present state
+    // only update if the reduced state differs from the present state
     if (history.latestUnfiltered == reducedState) {
       return history;
     } else if (isActionBlacklisted) {
@@ -54,6 +54,7 @@ Reducer<UndoableState> createUndoableReducer(dynamic reducer, {UndoableConfig co
     }
 
     history = insert(history, reducedState, config.limit);
+
     return history;
   };
 }

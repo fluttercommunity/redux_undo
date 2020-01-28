@@ -1,6 +1,6 @@
 import './classes.dart';
 
-/// helper for not mutating current state, but returning a new one
+/// helper for not mutating current [UndoableState], instead returning a new one
 UndoableState newHistory(List<dynamic> past, dynamic present, List<dynamic> future) {
   return UndoableState(
     past: past,
@@ -12,17 +12,19 @@ UndoableState newHistory(List<dynamic> past, dynamic present, List<dynamic> futu
   );
 }
 
-/// create a new history
+/// create a new [UndoableState]
 UndoableState createHistory(dynamic state, {bool ignoreInitialState = false}) {
   final UndoableState history = newHistory(<dynamic>[], state, <dynamic>[]);
+
   if (ignoreInitialState) {
     history.latestUnfiltered = null;
   }
+
   return history;
 }
 
-/// isHistory helper: check for a valid history object
-bool isHistory(UndoableState history) {
+/// isUndoableStateSane helper: check for a valid [UndoableState]
+bool isUndoableStateSane(UndoableState history) {
   return history is UndoableState &&
       history.present != null &&
       history.future != null &&
@@ -31,7 +33,7 @@ bool isHistory(UndoableState history) {
       history.past is List;
 }
 
-/// lengthWithoutFuture: get length of history
+/// lengthWithoutFuture: get length of [UndoableState]
 int lengthWithoutFuture(UndoableState history) {
   return history.index + 1;
 }
