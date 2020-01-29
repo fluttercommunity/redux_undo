@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           ),
           RaisedButton(
             child: const Text('Simple Counter'),
-            onPressed: getNavigation(context, 'simple_route'),
+            onPressed: getNavigation(context, 'simple_counter'),
           ),
         ],
       ),
