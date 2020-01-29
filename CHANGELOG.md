@@ -1,3 +1,7 @@
+## 0.1.1+2
+#### Updates
+- updated dependency version
+
 ## 0.1.1+1
 #### Critical Fix
 - added new boolean getters to the `UndoableState` class: `canUndo` and `canRedo`
