@@ -1,3 +1,11 @@
+## 0.1.1+3
+#### Important changes
+- added generic types to the `UndoableState` class and helper functions
+#### Fixes
+- fixed a navigation-bug in the example
+#### Updates
+- updated dependency version
+
 ## 0.1.1+2
 #### Updates
 - updated dependency version
