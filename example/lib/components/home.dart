@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           Text(
             'Welcome to the redux_undo example App',
-            style: Theme.of(context).textTheme.title
+            style: Theme.of(context).textTheme.title,
           ),
           Text(
             'Below you can find a list of examples which showcase the different use-cases',

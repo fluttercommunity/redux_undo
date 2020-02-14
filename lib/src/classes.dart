@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
 /// The state containing past, present and future
-class UndoableState {
+class UndoableState<S> {
   /// initiating the class
   UndoableState({
     @required this.past,
@@ -16,17 +16,17 @@ class UndoableState {
 
   /// either an empty List or filled with the past states
   /// filled when using normal actions or redoActions
-  final List<dynamic> past;
+  final List<S> past;
 
   /// the current state of the redux store
-  final dynamic present;
+  final S present;
 
   /// either an empty List or filled with future states
   /// it gets filled when using undoActions
-  final List<dynamic> future;
+  final List<S> future;
 
   /// the latest unfiltered state of the redux store
-  dynamic latestUnfiltered;
+  S latestUnfiltered;
 
   /// the current length of the past List
   int index;

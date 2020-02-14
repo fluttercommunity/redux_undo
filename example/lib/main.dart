@@ -19,8 +19,8 @@ final UndoableConfig config = UndoableConfig(
 
 /// redux_undo demo
 class MyApp extends StatelessWidget {
-  final Store<UndoableState> store = Store<UndoableState>(
-    createUndoableReducer(rootReducer, config: config),
+  final Store<UndoableState<RootState>> store = Store<UndoableState<RootState>>(
+    createUndoableReducer<RootState>(rootReducer, config: config),
     initialState: createUndoableState(RootState.initial(), false),
   );
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<UndoableState>(
+    return StoreProvider<UndoableState<RootState>>(
       store: store,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
