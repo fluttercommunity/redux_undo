@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_undo/redux_undo.dart';
 import 'package:redux_undo_example/components/wrapper.dart';
+import 'package:redux_undo_example/redux/root_state.dart';
 import 'package:redux_undo_example/redux/simple_counter/simple_counter_actions.dart';
 
 class SimpleCounter extends StatelessWidget {
@@ -10,9 +11,9 @@ class SimpleCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<UndoableState, Store<UndoableState>>(
-      converter: (Store<UndoableState> store) => store,
-      builder: (BuildContext context, Store<UndoableState> store) {
+    return StoreConnector<UndoableState<RootState>, Store<UndoableState<RootState>>>(
+      converter: (Store<UndoableState<RootState>> store) => store,
+      builder: (BuildContext context, Store<UndoableState<RootState>> store) {
         final int counter_1 = store.state.present.counter[0];
         final int counter_2 = store.state.present.counter[1];
         return Center(

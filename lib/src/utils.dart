@@ -1,8 +1,7 @@
 import './classes.dart';
 
 /// helper for not mutating current [UndoableState], instead returning a new one
-UndoableState<S> newHistory<S>(
-    List<S> past, S present, List<S> future) {
+UndoableState<S> newHistory<S>(List<S> past, S present, List<S> future) {
   return UndoableState<S>(
     past: past,
     present: present,
@@ -87,8 +86,7 @@ UndoableState<S> insert<S>(UndoableState<S> history, S state, int limit) {
   final List<S> past = history.past;
   final S latestUnfiltered = history.latestUnfiltered;
 
-  final bool historyOverflow =
-      limit > 0 && lengthWithoutFuture(history) >= limit;
+  final bool historyOverflow = limit > 0 && lengthWithoutFuture(history) >= limit;
 
   final List<S> pastSliced = past.sublist(historyOverflow ? 1 : 0);
   final List<S> newPast = List<S>.from(pastSliced);
