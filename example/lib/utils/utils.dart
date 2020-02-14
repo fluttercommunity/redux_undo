@@ -14,5 +14,11 @@ String getCurrentRouteName(BuildContext context) {
 Function() getNavigation(BuildContext context, String route) {
   final String currentRoute = getCurrentRouteName(context);
   if (route == currentRoute) return () => Navigator.pop(context);
+  return () => Navigator.pushNamed(context, route);
+}
+
+Function() getNavigationForDrawer(BuildContext context, String route) {
+  final String currentRoute = getCurrentRouteName(context);
+  if (route == currentRoute) return () => Navigator.pop(context);
   return () => Navigator.popAndPushNamed(context, route);
 }

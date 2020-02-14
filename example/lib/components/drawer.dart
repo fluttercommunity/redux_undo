@@ -24,7 +24,7 @@ class DrawerView extends StatelessWidget {
             ),
             title: const Text('Welcome'),
             selected: currentRoute == '/',
-            onTap: getNavigation(context, '/'),
+            onTap: getNavigationForDrawer(context, '/'),
           ),
           ListTile(
             leading: Icon(
@@ -33,7 +33,7 @@ class DrawerView extends StatelessWidget {
             ),
             title: const Text('Simple Counter'),
             selected: currentRoute == 'simple_counter',
-            onTap: getNavigation(context, 'simple_counter'),
+            onTap: getNavigationForDrawer(context, 'simple_counter'),
           ),
         ],
       ),
