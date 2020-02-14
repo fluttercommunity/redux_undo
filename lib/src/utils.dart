@@ -14,7 +14,7 @@ UndoableState<S> newHistory<S>(List<S> past, S present, List<S> future) {
 
 /// create a new [UndoableState]
 UndoableState<S> createHistory<S>(S state, {bool ignoreInitialState = false}) {
-  final UndoableState<S> history = newHistory(<S>[], state, <S>[]);
+  final history = newHistory(<S>[], state, <S>[]);
 
   if (ignoreInitialState) {
     history.latestUnfiltered = null;
@@ -42,13 +42,13 @@ int lengthWithoutFuture(UndoableState history) {
 UndoableState<S> jumpToPast<S>(UndoableState<S> history, int index) {
   if (index < 0 || index >= history.index) return history;
 
-  final List<S> past = history.past;
-  final List<S> future = history.future;
-  final S present = history.present;
+  final past = history.past;
+  final future = history.future;
+  final present = history.present;
 
-  final List<S> newPast = past.sublist(0, index);
-  final S newPresent = past[index];
-  final List<S> newFuture = List<S>.from(past.sublist(index + 1))
+  final newPast = past.sublist(0, index);
+  final newPresent = past[index];
+  final newFuture = List<S>.from(past.sublist(index + 1))
     ..add(present)
     ..addAll(future);
 
@@ -59,15 +59,15 @@ UndoableState<S> jumpToPast<S>(UndoableState<S> history, int index) {
 UndoableState<S> jumpToFuture<S>(UndoableState<S> history, int index) {
   if (index < 0 || index >= history.future.length) return history;
 
-  final List<S> past = history.past;
-  final List<S> future = history.future;
-  final S present = history.present;
+  final past = history.past;
+  final future = history.future;
+  final present = history.present;
 
-  final List<S> newPast = List<S>.from(past)
+  final newPast = List<S>.from(past)
     ..add(present)
     ..addAll(future.sublist(0, index));
-  final S newPresent = future[index];
-  final List<S> newFuture = future.sublist(index + 1);
+  final newPresent = future[index];
+  final newFuture = future.sublist(index + 1);
 
   return newHistory<S>(newPast, newPresent, newFuture);
 }
@@ -83,13 +83,13 @@ UndoableState<S> jump<S>(UndoableState<S> history, int index) {
 ///         into `past`, setting the new `state` as `present` and erasing
 ///         the `future`.
 UndoableState<S> insert<S>(UndoableState<S> history, S state, int limit) {
-  final List<S> past = history.past;
-  final S latestUnfiltered = history.latestUnfiltered;
+  final past = history.past;
+  final latestUnfiltered = history.latestUnfiltered;
 
-  final bool historyOverflow = limit > 0 && lengthWithoutFuture(history) >= limit;
+  final historyOverflow = limit > 0 && lengthWithoutFuture(history) >= limit;
 
-  final List<S> pastSliced = past.sublist(historyOverflow ? 1 : 0);
-  final List<S> newPast = List<S>.from(pastSliced);
+  final pastSliced = past.sublist(historyOverflow ? 1 : 0);
+  final newPast = List<S>.from(pastSliced);
 
   if (latestUnfiltered != null) {
     newPast..add(latestUnfiltered);

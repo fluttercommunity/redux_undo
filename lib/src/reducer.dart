@@ -18,13 +18,13 @@ Reducer<UndoableState<S>> createUndoableReducer<S>(Reducer<S> reducer, {Undoable
 
     // first check if the passed state is [UndoableState]: If not
     if (state is! UndoableState<S>) {
-      final S reducedState = reducer(state as S, UndoableInitAction());
+      final reducedState = reducer(state as S, UndoableInitAction());
       history = newHistory<S>(<S>[], reducedState, <S>[]);
     } else {
       history = state;
     }
 
-    final bool isActionWhiteListed = config.whiteList.contains(action.runtimeType);
+    final isActionWhiteListed = config.whiteList.contains(action.runtimeType);
 
     UndoableState<S> reduceAnyways(UndoableState<S> res) {
       return isActionWhiteListed ? newHistory<S>(res.past, reducer(res.present, action), res.future) : res;
@@ -32,22 +32,22 @@ Reducer<UndoableState<S>> createUndoableReducer<S>(Reducer<S> reducer, {Undoable
 
     // handle all Undo-, Redo-, Jump- and ClearActions here
     if (action is UndoableUndoAction) {
-      final UndoableState<S> res = jump<S>(history, -1);
+      final res = jump<S>(history, -1);
       return reduceAnyways(res);
     } else if (action is UndoableRedoAction) {
-      final UndoableState<S> res = jump(history, 1);
+      final res = jump(history, 1);
       return reduceAnyways(res);
     } else if (action is UndoableJumpAction) {
-      final UndoableState<S> res = jump(history, action.index);
+      final res = jump(history, action.index);
       return reduceAnyways(res);
     } else if (action is UndoableClearHistoryAction) {
-      final UndoableState<S> res = newHistory(<S>[], history.present, <S>[]);
+      final res = newHistory(<S>[], history.present, <S>[]);
       return reduceAnyways(res);
     }
 
-    final bool isActionBlacklisted = config.blackList.contains(action.runtimeType);
+    final isActionBlacklisted = config.blackList.contains(action.runtimeType);
 
-    final S reducedState = reducer(history.present, action);
+    final reducedState = reducer(history.present, action);
 
     // only update if the reduced state differs from the present state
     if (history.latestUnfiltered == reducedState) {
