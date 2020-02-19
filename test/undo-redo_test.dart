@@ -4,9 +4,7 @@ import 'package:test/test.dart';
 
 import 'test_data.dart';
 
-final UndoableConfig config = UndoableConfig(
-  whiteList: <Type>[],
-);
+final UndoableConfig config = UndoableConfig();
 
 final Store<UndoableState<int>> store = Store<UndoableState<int>>(
   createUndoableReducer<int>(IntReducer(), config: config),
@@ -15,6 +13,15 @@ final Store<UndoableState<int>> store = Store<UndoableState<int>>(
 
 void main() {
   group('State', () {
+    test('is initialized as UndoableState', () {
+      expect(store.state is UndoableState, equals(true));
+    });
+
+    test('can neither be undone or redone', () {
+      expect(store.state.canUndo, equals(false));
+      expect(store.state.canRedo, equals(false));
+    });
+
     test('present is incremented by 1', () {
       store.dispatch(IncrementTestAction());
       expect(store.state.present, equals(1));
@@ -50,6 +57,25 @@ void main() {
 
     test('future has length of 1', () {
       expect(store.state.future.length, equals(1));
+    });
+  });
+
+  group('Redo', () {
+    test('is possible', () {
+      expect(store.state.canRedo, equals(true));
+    });
+
+    test('is performed', () {
+      store.dispatch(UndoableRedoAction());
+      expect(store.state.present, equals(0));
+    });
+
+    test('past has length of 1', () {
+      expect(store.state.past.length, equals(2));
+    });
+
+    test('future has length of 1', () {
+      expect(store.state.future.length, equals(0));
     });
   });
 }
