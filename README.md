@@ -7,6 +7,10 @@ This package will make your redux store undoable.
 > 
 > **The package as it is now is still in Beta phase. So you are free to use it as is, but please keep in mind that, until version 1.0.0 is released all class, function and helper-names are prone to change.** 
 
+## Things to come in the future
+- [ ] Support for string based actions (currently supported are only class-based actions)
+- [ ] more examples and documentation
+
 ## Installation
 
 define the dependency in your `pubspec.yaml` file:
@@ -39,7 +43,7 @@ UndoableHistory state = {
   past: <dynamic>[],
   present: null, // <-- the current state of the app
   future: <dynamic>[],
-  latestUnfiltered: null// <-- basically equals present, to store a mutual state before storing it into past or future 
+  latestUnfiltered: null // <-- basically equals present, to store a mutual state before storing it into past or future 
 };
 ```
 

@@ -1,11 +1,11 @@
 import 'package:meta/meta.dart';
 import 'package:redux_undo/redux_undo.dart';
 
-/// Testing Variables
+/// Test-Data: Variables
 final int INITIAL_COUNTER = 0;
 final String INITIAL_TITLE = 'initial Title';
 
-/// Testing Reducer function
+/// Test-Data: Reducer function
 int intReducer(int state, dynamic action) {
   if (action is IncrementTestAction) {
     return state + 1;
@@ -30,7 +30,7 @@ String stringReducer(String state, dynamic action) {
   return state;
 }
 
-/// Testing Actions
+/// Test-Data: Actions
 class IncrementTestAction {}
 
 class DecrementTestAction {}
@@ -64,7 +64,7 @@ class BlacklistTestAction {
 
 class CustomUndoAction extends UndoableUndoAction {}
 
-/// Testing States
+/// Test-Data: States
 @immutable
 class TestState {
   const TestState({
