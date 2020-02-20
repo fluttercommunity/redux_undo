@@ -23,6 +23,8 @@ String stringReducer(String state, dynamic action) {
     return action.value;
   } else if (action is WhitelistTestAction) {
     return action.value;
+  } else if (action is BlacklistTestAction) {
+    return action.value;
   }
 
   return state;
@@ -44,6 +46,15 @@ class StringTestAction {
 
 class WhitelistTestAction extends UndoableUndoAction {
   WhitelistTestAction({
+    @required this.value
+  });
+
+  // String value
+  final String value;
+}
+
+class BlacklistTestAction {
+  BlacklistTestAction({
     @required this.value
   });
 
