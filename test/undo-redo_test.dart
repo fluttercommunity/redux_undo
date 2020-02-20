@@ -7,7 +7,7 @@ import 'test_data.dart';
 final UndoableConfig config = UndoableConfig();
 
 final Store<UndoableState<int>> store = Store<UndoableState<int>>(
-  createUndoableReducer<int>(IntReducer(), config: config),
+  createUndoableReducer<int>(intReducer, config: config),
   initialState: createUndoableState(0, false),
 );
 
