@@ -14,16 +14,6 @@ Reducer<UndoableState<S>> createUndoableReducer<S>(Reducer<S> reducer, {Undoable
   config ??= UndoableConfig();
 
   return (UndoableState<S> state, dynamic action) {
-    UndoableState<S> history;
-
-    // first check if the passed state is [UndoableState]: If not
-    if (state is! UndoableState<S>) {
-      final reducedState = reducer(state as S, UndoableInitAction());
-      history = newHistory<S>(<S>[], reducedState, <S>[]);
-    } else {
-      history = state;
-    }
-
     final isActionWhiteListed = config.whiteList.contains(action.runtimeType);
 
     UndoableState<S> reduceAnyways(UndoableState<S> res) {
@@ -32,31 +22,31 @@ Reducer<UndoableState<S>> createUndoableReducer<S>(Reducer<S> reducer, {Undoable
 
     // handle all Undo-, Redo-, Jump- and ClearActions here
     if (action is UndoableUndoAction) {
-      final res = jump<S>(history, -1);
+      final res = jump<S>(state, -1);
       return reduceAnyways(res);
     } else if (action is UndoableRedoAction) {
-      final res = jump(history, 1);
+      final res = jump(state, 1);
       return reduceAnyways(res);
     } else if (action is UndoableJumpAction) {
-      final res = jump(history, action.index);
+      final res = jump(state, action.index);
       return reduceAnyways(res);
     } else if (action is UndoableClearHistoryAction) {
-      final res = newHistory(<S>[], history.present, <S>[]);
+      final res = newHistory(<S>[], state.present, <S>[]);
       return reduceAnyways(res);
     }
 
     final isActionBlacklisted = config.blackList.contains(action.runtimeType);
 
-    final reducedState = reducer(history.present, action);
+    final reducedState = reducer(state.present, action);
 
     // only update if the reduced state differs from the present state
-    if (history.latestUnfiltered == reducedState) {
-      return history;
+    if (state.latestUnfiltered == reducedState) {
+      return state;
     } else if (isActionBlacklisted) {
-      return newHistory(history.past, reducedState, history.future);
+      return newHistory(state.past, reducedState, state.future);
     }
 
-    history = insert(history, reducedState, config.limit);
-    return history;
+    state = insert(state, reducedState, config.limit);
+    return state;
   };
 }
