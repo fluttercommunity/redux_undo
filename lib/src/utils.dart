@@ -86,7 +86,7 @@ UndoableState<S> insert<S>(UndoableState<S> history, S state, int limit) {
   final past = history.past;
   final latestUnfiltered = history.latestUnfiltered;
 
-  final historyOverflow = limit > 0 && lengthWithoutFuture(history) >= limit;
+  final historyOverflow = limit > 0 && history.index >= limit;
 
   final pastSliced = past.sublist(historyOverflow ? 1 : 0);
   final newPast = List<S>.from(pastSliced);

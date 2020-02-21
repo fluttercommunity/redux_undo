@@ -25,31 +25,6 @@ final String updatedTitle = 'Updated Title';
 final String whiteListActionTitle = 'WhitelistAction Title';
 
 void main() {
-  group('TestState', () {
-    test('is initialized as UndoableState', () {
-      expect(store.state is UndoableState, equals(true));
-    });
-
-    test('present is  initialized as TestState', () {
-      expect(store.state.present is TestState, equals(true));
-    });
-
-    test('can neither be undone or redone', () {
-      expect(store.state.canUndo, equals(false));
-      expect(store.state.canRedo, equals(false));
-    });
-
-    test('past and futurer have length of 0', () {
-      expect(store.state.past.length, equals(0));
-      expect(store.state.past.length, equals(0));
-    });
-
-    test('initial values are correct', () {
-      expect(store.state.present.counter, equals(INITIAL_COUNTER));
-      expect(store.state.present.title, equals(INITIAL_TITLE));
-    });
-  });
-
   group('StringAction', () {
     test('is performed correctly', () {
       store.dispatch(StringTestAction(value: updatedTitle));

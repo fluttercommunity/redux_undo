@@ -24,19 +24,21 @@ final Store<UndoableState<TestState>> store = Store<UndoableState<TestState>>(
 final String updatedTitle = 'Updated Title';
 
 void main() {
-  group('BlackList', () {
+  group('BlackList: ', () {
     test('is performed correctly', () {
       store.dispatch(BlacklistTestAction(value: updatedTitle));
       expect(store.state.present.counter, equals(0));
       expect(store.state.present.title, equals(updatedTitle));
     });
 
-    test('past is not updated', () {
+    test('past and future is not updated', () {
       expect(store.state.past.length, equals(0));
+      expect(store.state.future.length, equals(0));
     });
 
-    test('future is not updated', () {
-      expect(store.state.future.length, equals(0));
+    test('can neither be undone or redone', () {
+      expect(store.state.canUndo, equals(false));
+      expect(store.state.canRedo, equals(false));
     });
   });
 }
