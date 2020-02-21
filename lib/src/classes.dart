@@ -1,5 +1,4 @@
 import 'package:meta/meta.dart';
-import 'package:redux_undo/redux_undo.dart';
 
 /// The state containing past, present and future
 class UndoableState<S> {
@@ -116,18 +115,18 @@ class UndoableConfig {
   /// - blackList = <Type>[]
   /// - whiteList = <UndoableAction>[]
   UndoableConfig({
-    this.limit,
-    this.blackList,
-    this.whiteList,
+    this.limit = 10,
+    this.blackList = const <Type>[],
+    this.whiteList = const <Type>[],
   });
 
   /// limit the length of the past List
   /// defaultValue: 10
-  int limit = 10;
+  int limit;
 
   /// blacklist certain Actions
-  List<Type> blackList = <Type>[];
+  List<Type> blackList;
 
   /// whiteList certain Actions
-  List<Type> whiteList = <Type>[];
+  List<Type> whiteList;
 }
