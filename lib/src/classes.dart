@@ -9,7 +9,6 @@ class UndoableState<S> {
     @required this.future,
     this.latestUnfiltered,
     this.index,
-    this.size,
   })  : assert(past != null),
         assert(present != null),
         assert(future != null);
@@ -32,7 +31,7 @@ class UndoableState<S> {
   int index;
 
   /// the size of the UndoableState (past.length + 1 (present) + future.length)
-  int size;
+  int get getSize => past.length + 1 + future.length;
 
   /// Lets you check if the [UndoableState] is able to undo (past has items in it)
   /// This is especially handy when you want to disable the undo button or want to show some other kind of indication
@@ -64,7 +63,7 @@ class UndoableState<S> {
 
   @override
   String toString() =>
-      'StateHistory: List<dynamic> past: ${past.toString()}, present: ${present.toString()}, List<dynamic> future: ${future.toString()}, latestUnfiltered: ${latestUnfiltered.toString()}';
+      'UndoableState: List<$S> past: ${past.toString()}, $S present: ${present.toString()}, List<$S> future: ${future.toString()}, $S latestUnfiltered: ${latestUnfiltered.toString()}, int index: $index';
 }
 
 /// A class for setting the config of the UndoableReducer

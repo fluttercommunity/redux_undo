@@ -8,7 +8,6 @@ UndoableState<S> newHistory<S>(List<S> past, S present, List<S> future) {
     future: future,
     latestUnfiltered: present,
     index: past.length,
-    size: past.length + future.length + 1,
   );
 }
 
