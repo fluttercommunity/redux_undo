@@ -1,16 +1,17 @@
 import 'package:redux/redux.dart';
-
 import './actions.dart';
 import './classes.dart';
 import './utils.dart';
 
 /// create a new [UndoableState] with this helper function which does make importing the utils needless by default
-UndoableState<S> createUndoableState<S>(S initialState, bool ignoreInitialState) =>
+UndoableState<S> createUndoableState<S>(
+        S initialState, bool ignoreInitialState) =>
     createHistory(initialState, ignoreInitialState: ignoreInitialState);
 
 /// this is the core reducer that calls the given root reducer or skips it
 /// depending on what action is provided and returns the new [UndoableState]
-Reducer<UndoableState<S>> createUndoableReducer<S>(Reducer<S> reducer, {UndoableConfig config}) {
+Reducer<UndoableState<S>> createUndoableReducer<S>(Reducer<S> reducer,
+    {UndoableConfig config}) {
   config ??= UndoableConfig();
 
   return (UndoableState<S> state, dynamic action) {
@@ -27,7 +28,9 @@ Reducer<UndoableState<S>> createUndoableReducer<S>(Reducer<S> reducer, {Undoable
     final isActionWhiteListed = config.whiteList.contains(action.runtimeType);
 
     UndoableState<S> reduceAnyways(UndoableState<S> res) {
-      return isActionWhiteListed ? newHistory<S>(res.past, reducer(res.present, action), res.future) : res;
+      return isActionWhiteListed
+          ? newHistory<S>(res.past, reducer(res.present, action), res.future)
+          : res;
     }
 
     // handle all Undo-, Redo-, Jump- and ClearActions here
@@ -57,7 +60,6 @@ Reducer<UndoableState<S>> createUndoableReducer<S>(Reducer<S> reducer, {Undoable
     }
 
     history = insert(history, reducedState, config.limit);
-
     return history;
   };
 }
