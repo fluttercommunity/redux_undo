@@ -10,7 +10,6 @@ before_script:
   - ./flutter/bin/flutter packages get
 script:
   - dartanalyzer --fatal-infos --fatal-warnings ./lib/
-  - dartfmt -n ./lib --set-exit-if-changed
   - pub global activate coverage
   - pub run test test/redux_undo_test.dart
   - dart --disable-service-auth-codes --enable-vm-service=8111 --pause-isolates-on-exit test/redux_undo_test.dart &
