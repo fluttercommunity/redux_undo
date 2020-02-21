@@ -63,7 +63,12 @@ class UndoableState<S> {
 
   @override
   String toString() =>
-      'UndoableState: List<$S> past: ${past.toString()}, $S present: ${present.toString()}, List<$S> future: ${future.toString()}, $S latestUnfiltered: ${latestUnfiltered.toString()}, int index: $index';
+      'UndoableState: '
+        'List<$S> past: $past, '
+        '$S present: $present, '
+        'List<$S> future: $future, '
+        '$S latestUnfiltered: $latestUnfiltered, '
+        'int index: $index';
 }
 
 /// A class for setting the config of the [UndoableReducer]
