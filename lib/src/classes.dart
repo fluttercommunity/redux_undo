@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:redux_undo/redux_undo.dart';
 
 /// The state containing past, present and future
 class UndoableState<S> {
@@ -66,22 +67,67 @@ class UndoableState<S> {
       'UndoableState: List<$S> past: ${past.toString()}, $S present: ${present.toString()}, List<$S> future: ${future.toString()}, $S latestUnfiltered: ${latestUnfiltered.toString()}, int index: $index';
 }
 
-/// A class for setting the config of the UndoableReducer
+/// A class for setting the config of the [UndoableReducer]
+/// options that can be set with this include:
+/// 1. limit:
+///     limits the times you can undo a certain action ([UndoableState].past.length <= limit).
+///     By limiting the length of [UndoableState].past the length of
+///     [UndoableState].future is ultimately limited as well
+///
+///     Example:
+///     ```dart
+///       final config = UndoableConfig({limit: 100});
+///     ```
+///
+/// 2. blackList:
+///     A List of Types that, when dispatched, do not update the [UndoableState].past
+///
+///     Example:
+///     ```dart
+///       final config = UndoableConfig({
+///         blackList: <Type>[
+///           BlackListedType,
+///         ]
+///       });
+///     ```
+///
+/// 3. whiteList:
+///     A List of Types that need to be extended from [UndoableAction]:
+///       - UndoableInitAction
+///       - UndoableUndoAction
+///       - UndoableRedoAction
+///       - UndoableJumpAction
+///       - UndoableClearHistoryAction
+///
+///     Example:
+///     ```dart
+///       class WhiteListedType extends UndoableRedoAction { ... }
+///
+///       final config = UndoableConfig({
+///         whiteList: <Type>[
+///           WhiteListedType,
+///         ]
+///       });
+///     ```
 class UndoableConfig {
   /// initiating the class
+  /// default-values for the options are:
+  /// - limit = 10
+  /// - blackList = <Type>[]
+  /// - whiteList = <UndoableAction>[]
   UndoableConfig({
-    this.limit = 10,
-    this.blackList = const <Type>[],
-    this.whiteList = const <Type>[],
+    this.limit,
+    this.blackList,
+    this.whiteList,
   });
 
   /// limit the length of the past List
   /// defaultValue: 10
-  int limit;
+  int limit = 10;
 
   /// blacklist certain Actions
-  List<Type> blackList;
+  List<Type> blackList = <Type>[];
 
   /// whiteList certain Actions
-  List<Type> whiteList;
+  List<Type> whiteList = <Type>[];
 }

@@ -1,16 +1,20 @@
 import 'package:meta/meta.dart';
 
+/// abstract class [UndoableAction] from which all other action classes inherit.
+/// This makes it easier to check for a specific type in Lists, etc.
+abstract class UndoableAction {}
+
 /// Standard-Action for initiating the history
-class UndoableInitAction {}
+class UndoableInitAction extends UndoableAction {}
 
 /// Standard-Action for undo
-class UndoableUndoAction {}
+class UndoableUndoAction extends UndoableAction {}
 
 /// Standard-Action for redo
-class UndoableRedoAction {}
+class UndoableRedoAction extends UndoableAction {}
 
 /// Standard-Action for jump (to past or to future)
-class UndoableJumpAction {
+class UndoableJumpAction extends UndoableAction {
   /// intiating the UndoableJumpAction
   UndoableJumpAction({
     @required this.index,
@@ -21,4 +25,4 @@ class UndoableJumpAction {
 }
 
 /// Standard-Action for clearing the history
-class UndoableClearHistoryAction {}
+class UndoableClearHistoryAction extends UndoableAction {}
