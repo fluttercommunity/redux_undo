@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/michelengelen/redux_undo.svg?branch=master)](https://travis-ci.com/michelengelen/redux_undo) [![codecov](https://codecov.io/gh/michelengelen/redux_undo/branch/master/graph/badge.svg)](https://codecov.io/gh/michelengelen/redux_undo)
+
 # redux_undo.dart
 
 This package will make your redux store undoable.
