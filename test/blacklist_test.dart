@@ -4,11 +4,9 @@ import 'package:test/test.dart';
 
 import 'test_data.dart';
 
-final UndoableConfig config = UndoableConfig(
-  blackList: <Type>[
-    BlacklistTestAction,
-  ]
-);
+final UndoableConfig config = UndoableConfig(blackList: <Type>[
+  BlacklistTestAction,
+]);
 
 // We create the State reducer by combining many smaller reducers into one!
 TestState rootReducer(TestState state, dynamic action) {

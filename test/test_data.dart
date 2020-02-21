@@ -36,27 +36,21 @@ class IncrementTestAction {}
 class DecrementTestAction {}
 
 class StringTestAction {
-  StringTestAction({
-    @required this.value
-  });
+  StringTestAction({@required this.value});
 
   // String value
   final String value;
 }
 
 class WhitelistTestAction extends UndoableUndoAction {
-  WhitelistTestAction({
-    @required this.value
-  });
+  WhitelistTestAction({@required this.value});
 
   // String value
   final String value;
 }
 
 class BlacklistTestAction {
-  BlacklistTestAction({
-    @required this.value
-  });
+  BlacklistTestAction({@required this.value});
 
   // String value
   final String value;
@@ -97,7 +91,8 @@ class TestState {
 
   @override
   bool operator ==(Object other) =>
-    identical(this, other) || other is TestState && runtimeType == other.runtimeType && counter == other.counter && title == other.title;
+      identical(this, other) ||
+      other is TestState && runtimeType == other.runtimeType && counter == other.counter && title == other.title;
 
   @override
   String toString() {
