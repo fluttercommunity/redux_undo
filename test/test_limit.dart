@@ -24,7 +24,7 @@ final String updatedTitle = 'Updated Title';
 final String whiteListActionTitle = 'WhitelistAction Title';
 
 void main() {
-  group('Limit: ', () {
+  group('State preparation: ', () {
     test('past is filled to a max of $historyLimit', () {
       for (var i = 0; i < historyLimit; i++) {
         store.dispatch(IncrementTestAction());
@@ -33,12 +33,14 @@ void main() {
       expect(store.state.present.counter, equals(historyLimit));
       expect(store.state.present.title, equals(INITIAL_TITLE));
     });
+  });
 
+  group('Limit: ', () {
     test('past has length of ${historyLimit}', () {
       expect(store.state.past.length, equals(historyLimit));
     });
 
-    test('future has length of 1', () {
+    test('future has length of 0', () {
       expect(store.state.future.length, equals(0));
     });
 
@@ -50,6 +52,10 @@ void main() {
       store.dispatch(IncrementTestAction());
       expect(store.state.present.counter, equals(historyLimit + 1));
       expect(store.state.present.title, equals(INITIAL_TITLE));
+    });
+
+    test('past still has length of ${historyLimit}', () {
+      expect(store.state.past.length, equals(historyLimit));
     });
 
     test('oldest entry in past now has a value of ${INITIAL_COUNTER + 1}', () {

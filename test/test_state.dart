@@ -51,6 +51,10 @@ void main() {
       expect(store.state.index, equals(0));
     });
 
+    test('lengthWithoutFuture is returning correct value', () {
+      expect(lengthWithoutFuture(store.state), equals(1));
+    });
+
     test('size is calculated correctly', () {
       expect(store.state.getSize, equals(1));
     });

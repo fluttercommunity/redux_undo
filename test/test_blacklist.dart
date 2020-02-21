@@ -25,18 +25,18 @@ final String updatedTitle = 'Updated Title';
 
 void main() {
   group('BlackList: ', () {
-    test('is performed correctly', () {
+    test('state is updated correctly', () {
       store.dispatch(BlacklistTestAction(value: updatedTitle));
       expect(store.state.present.counter, equals(0));
       expect(store.state.present.title, equals(updatedTitle));
     });
 
-    test('past and future is not updated', () {
+    test('past and future are not updated', () {
       expect(store.state.past.length, equals(0));
       expect(store.state.future.length, equals(0));
     });
 
-    test('can neither be undone or redone', () {
+    test('action can neither be undone or redone', () {
       expect(store.state.canUndo, equals(false));
       expect(store.state.canRedo, equals(false));
     });

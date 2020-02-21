@@ -38,8 +38,8 @@ void main() {
     });
   });
 
-  group('JumpAction', () {
-    test('is performed correctly', () {
+  group('JumpAction: ', () {
+    test('correctly jumps to past state', () {
       store.dispatch(UndoableJumpAction(index: -jumpAmount));
       expect(store.state.present.counter, equals(0));
       expect(store.state.present.title, equals(updatedTitle));
@@ -51,6 +51,26 @@ void main() {
 
     test('future has length of 4', () {
       expect(store.state.future.length, equals(jumpAmount));
+    });
+
+    test('correctly returns old state if `index === 0`', () {
+      store.dispatch(UndoableJumpAction(index: 0));
+      expect(store.state.present.counter, equals(0));
+      expect(store.state.present.title, equals(updatedTitle));
+    });
+
+    test('correctly jumps to future', () {
+      store.dispatch(UndoableJumpAction(index: 2));
+      expect(store.state.present.counter, equals(2));
+      expect(store.state.present.title, equals(updatedTitle));
+    });
+
+    test('past has length of 3', () {
+      expect(store.state.past.length, equals(3));
+    });
+
+    test('future has length of 2', () {
+      expect(store.state.future.length, equals(2));
     });
   });
 }

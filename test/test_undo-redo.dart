@@ -18,7 +18,7 @@ final Store<UndoableState<TestState>> store = Store<UndoableState<TestState>>(
 );
 
 void main() {
-  group('UndoableState', () {
+  group('State Preparation: ', () {
     test('present is incremented by 1', () {
       store.dispatch(IncrementTestAction());
       expect(store.state.present.counter, equals(1));
@@ -43,7 +43,7 @@ void main() {
     });
   });
 
-  group('UndoableUndoAction', () {
+  group('UndoableUndoAction: ', () {
     test('is possible', () {
       expect(store.state.canUndo, equals(true));
     });
@@ -78,7 +78,7 @@ void main() {
     });
   });
 
-  group('UndoableRedoAction', () {
+  group('UndoableRedoAction: ', () {
     test('is possible', () {
       expect(store.state.canRedo, equals(true));
     });
