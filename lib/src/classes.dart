@@ -62,13 +62,12 @@ class UndoableState<S> {
   bool get canRedo => future.isNotEmpty;
 
   @override
-  String toString() =>
-      'UndoableState: '
-        'List<$S> past: $past, '
-        '$S present: $present, '
-        'List<$S> future: $future, '
-        '$S latestUnfiltered: $latestUnfiltered, '
-        'int index: $index';
+  String toString() => 'UndoableState: '
+      'List<$S> past: $past, '
+      '$S present: $present, '
+      'List<$S> future: $future, '
+      '$S latestUnfiltered: $latestUnfiltered, '
+      'int index: $index';
 }
 
 /// A class for setting the config of the [UndoableReducer]
@@ -118,7 +117,7 @@ class UndoableConfig {
   /// default-values for the options are:
   /// - limit = 10
   /// - blackList = <Type>[]
-  /// - whiteList = <UndoableAction>[]
+  /// - whiteList = <Type>[]
   UndoableConfig({
     this.limit = 10,
     this.blackList = const <Type>[],
