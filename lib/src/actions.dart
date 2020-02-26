@@ -4,9 +4,6 @@ import 'package:meta/meta.dart';
 /// This makes it easier to check for a specific type in Lists, etc.
 abstract class UndoableAction {}
 
-/// Standard-Action for initiating the history
-class UndoableInitAction extends UndoableAction {}
-
 /// Standard-Action for undo
 class UndoableUndoAction extends UndoableAction {}
 

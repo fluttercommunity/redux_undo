@@ -30,7 +30,7 @@ class UndoableState<S> {
   /// the current length of the past List
   int index;
 
-  /// the size of the UndoableState (past.length + 1 (present) + future.length)
+  /// the current size of the UndoableState (past.length + 1 (present) + future.length)
   int get getSize => past.length + 1 + future.length;
 
   /// Lets you check if the [UndoableState] is able to undo (past has items in it)
