@@ -11,6 +11,7 @@ This package will make your redux store undoable.
 
 ## Things to come in the future
 - [ ] Support for string based actions (currently supported are only class-based actions)
+- [ ] Support for making only a slice of the state undoable
 - [ ] more examples and documentation
 
 ## Installation
@@ -18,7 +19,7 @@ This package will make your redux store undoable.
 define the dependency in your `pubspec.yaml` file:
 ```yaml
 dependencies:
-  redux_undo: ^0.1.0+4
+  redux_undo: ^0.1.1+4
 ```
 
 update your applications packages by running
@@ -41,10 +42,10 @@ import 'package:redux_undo/redux_undo.dart';
 `redux_undo` will slightly modify your state by adding a new properties-layer at the root of the store. The final structure will look like this:
 ```dart
 /// when accessed directly from the store, store.state will have this structure
-UndoableHistory state = {
-  past: <dynamic>[],
+UndoableHistory<S> state = {
+  past: <S>[],
   present: null, // <-- the current state of the app
-  future: <dynamic>[],
+  future: <S>[],
   latestUnfiltered: null // <-- basically equals present, to store a mutual state before storing it into past or future 
 };
 ```
@@ -56,12 +57,11 @@ This is done by calling 2 separate functions:
 
 ```dart
 /// to wrap the root reducer
-Reducer<UndoableState> createUndoableReducer(Function<Reducer> reducer, UndoableConfig config);
+Reducer<UndoableState<S>> createUndoableReducer<S>(Reducer<S> reducer, { UndoableConfig config });
 
 /// to wrap the Root state of your app.
-UndoableState createUndoableState(dynamic state);
+UndoableState<S> createUndoableState<S>(S initialState, bool ignoreInitialState);
 ```
-
 
 Here is an example of how this can be done in a flutter app:
 ```dart
@@ -74,14 +74,14 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
 
-  final Store<UndoableState> store = Store<UndoableState>(
-    createUndoableReducer(rootReducer),
-    initialState: createUndoableState(RootState.initial()),
+  final Store<UndoableState<RootState>> store = Store<UndoableState<RootState>>(
+    createUndoableReducer<RootState>(rootReducer),
+    initialState: createUndoableState(RootState.initial(), false),
   );
 
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<UndoableState>(
+    return StoreProvider<UndoableState<RootState>>(
       store: store,
       child: MaterialApp(
         title: 'Redux Undo Demo',
@@ -91,6 +91,53 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
+## Actions
+
+`redux_undo` provides 4 basic actions
+
+- `UndoableUndoAction` - Standard-Action for undo
+    
+    **Usage:** `store.dispatch(UndoableUndoAction())`
+- `UndoableRedoAction` - Standard-Action for redo
+    
+    **Usage:** `store.dispatch(UndoableRedoAction())`
+- `UndoableJumpAction` - Standard-Action for jump (to past or to future)
+    
+    **Usage:** `store.dispatch(UndoableJumpAction(index: -2))` // <- jumps 2 steps to the past (same as dispatching `UndoableUndoAction` twice)
+    
+    **Usage:** `store.dispatch(UndoableJumpAction(index: 0))` // <- does nothing, since it just returns the current `UndoableState`
+    
+    **Usage:** `store.dispatch(UndoableJumpAction(index: 2))` // <- jumps 2 steps to the future (same as dispatching `UndoableRedoAction` twice)
+
+- `UndoableClearHistoryAction` - Standard-Action for clearing the history
+
+## Options
+
+It is possible to provide a configuration object to the UndoableState instantiation like this:
+```dart
+final UndoableConfig config = UndoableConfig(
+  limit: 100,
+  blackList: <Type>[
+    BlacklistedAction,
+  ],
+  whiteList: <Type>[
+    WhitelistedAction,
+  ],
+);
+```
+
+Then pass it to the `createUndoableReducer` function like this:
+```dart
+final Store<UndoableState<RootState>> store = Store<UndoableState<RootState>>(
+    createUndoableReducer<RootState>(rootReducer, config: config),
+    initialState: createUndoableState(RootState.initial(), false),
+);
+```
+These are the options the `UndoableConfig` class provides:
+- int limit: limits the length of the `UndoableState.past` List and with this ultimately the length of `UndoableState.future` as well
+    - default value => **10**
+- List<Type> whiteList: actions in this list need to be extended from one of the provided `redux_undo` actions and will fire the original `rootReducer` after performing the action they extended from without updating `UndoableState.past` or `UndoableState.future`  
 
 ## Contributors
 

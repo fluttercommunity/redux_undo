@@ -1,3 +1,14 @@
+## 0.1.1+4
+#### Important changes
+- added abstract class `UndoableAction` which every pre-built action from `redux_undo` extends
+- removed the `size` member from `UndoableState`
+- added the `getSize` getter to `UndoableState`
+- removed `UndoableInitAction` since the use-case does not exist anymore
+#### Tests
+- added tests for complete code coverage
+#### Updates
+- updated README
+
 ## 0.1.1+3
 #### Important changes
 - added generic types to the `UndoableState` class and helper functions
