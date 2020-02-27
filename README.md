@@ -1,3 +1,5 @@
+[![Flutter Community: redux_und](https://fluttercommunity.dev/_github/header/PACKAGE_NAME)](https://github.com/fluttercommunity/community)
+
 [![Build Status](https://travis-ci.com/michelengelen/redux_undo.svg?branch=master)](https://travis-ci.com/michelengelen/redux_undo) [![codecov](https://codecov.io/gh/michelengelen/redux_undo/branch/master/graph/badge.svg)](https://codecov.io/gh/michelengelen/redux_undo)
 
 # redux_undo.dart
@@ -19,7 +21,7 @@ This package will make your redux store undoable.
 define the dependency in your `pubspec.yaml` file:
 ```yaml
 dependencies:
-  redux_undo: ^0.1.1+4
+  redux_undo: ^0.1.1+5
 ```
 
 update your applications packages by running

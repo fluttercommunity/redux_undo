@@ -1,10 +1,12 @@
 name: redux_undo
 description: Make your redux store undo- and redoable. Inspired by the JS redux_undo package.
 homepage: https://github.com/michelengelen/redux_undo
+maintainer: Michel Engelen (@michelengelen)
 authors:
+  - Flutter Community <community@flutter.zone>
   - Michel Engelen <michel@nomorejs.net>
 
-version: 0.1.1+4
+version: 0.1.1+5
 
 environment:
   sdk: ">=2.0.0 <3.0.0"
