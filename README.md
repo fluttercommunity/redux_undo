@@ -1,7 +1,7 @@
-[![Flutter Community: redux_undo](https://fluttercommunity.dev/_github/header/redux_undo)](https://github.com/fluttercommunity/community)
+[![Flutter Community: redux_und](https://fluttercommunity.dev/_github/header/PACKAGE_NAME)](https://github.com/fluttercommunity/community)
 
-[![Build Status](https://travis-ci.com/michelengelen/redux_undo.svg?branch=master)](https://travis-ci.com/michelengelen/redux_undo)
-[![codecov](https://codecov.io/gh/michelengelen/redux_undo/branch/master/graph/badge.svg)](https://codecov.io/gh/michelengelen/redux_undo)
+[![Build Status](https://travis-ci.com/fluttercommunity/redux_undo.svg?branch=master)](https://travis-ci.com/fluttercommunity/redux_undo)
+[![codecov](https://codecov.io/gh/fluttercommunity/redux_undo/branch/master/graph/badge.svg)](https://codecov.io/gh/fluttercommunity/redux_undo)
 [![pub package](https://img.shields.io/pub/v/redux_undo.svg)](https://pub.dartlang.org/packages/redux_undo)
 
 # redux_undo.dart
