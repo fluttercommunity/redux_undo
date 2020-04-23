@@ -6,7 +6,7 @@ authors:
   - Flutter Community <community@flutter.zone>
   - Michel Engelen <michel@nomorejs.net>
 
-version: 0.1.1+5
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.0.0 <3.0.0"

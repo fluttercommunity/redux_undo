@@ -8,13 +8,7 @@
 
 This package will make your redux store undoable.
 
-## READ THIS FIRST
-> :warning:
-> 
-> **The package as it is now is still in Beta phase. So you are free to use it as is, but please keep in mind that, until version 1.0.0 is released all class, function and helper-names are prone to change.** 
-
 ## Things to come in the future
-- [ ] Support for string based actions (currently supported are only class-based actions)
 - [ ] Support for making only a slice of the state undoable
 - [ ] more examples and documentation
 
@@ -23,7 +17,7 @@ This package will make your redux store undoable.
 define the dependency in your `pubspec.yaml` file:
 ```yaml
 dependencies:
-  redux_undo: ^0.1.1+5
+  redux_undo: ^1.0.0+1
 ```
 
 update your applications packages by running
